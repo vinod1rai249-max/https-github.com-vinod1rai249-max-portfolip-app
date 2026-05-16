@@ -1,0 +1,11 @@
+{
+  "name": "Vinod Rai | Elite AI Architect",
+  "description": "Premium AI & ML Portfolio showcasing advanced agentic architectures, mission-critical integration benchmarks, and neural-powered engineering solutions.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
