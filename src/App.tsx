@@ -1841,9 +1841,16 @@ const ReactionsWidget = () => {
 
 
 const LiveDemoSection = () => {
-  const [activeDemo, setActiveDemo] = useState<'clinicalSupport' | 'adpoHealth' | 'adpo' | 'chatbot' | 'securityControlPlane'>('clinicalSupport');
+  const [activeDemo, setActiveDemo] = useState<'trialSync' | 'clinicalSupport' | 'adpoHealth' | 'adpo' | 'chatbot' | 'securityControlPlane'>('trialSync');
 
   const demos = {
+    trialSync: {
+      title: 'Trial Sync Platform',
+      desc: 'Clinical data synchronization protocol and real-time trial management pipeline.',
+      url: 'https://trial-sync-az9p4tybblgkkwpoxv4x9q.streamlit.app/?embed=true',
+      domain: 'trial-sync.streamlit.app',
+      icon: <Network size={20} />
+    },
     clinicalSupport: {
       title: 'Clinical Decision Support',
       desc: 'AI-powered diagnostic support tool providing clinical evidence-based recommendations.',
@@ -1946,14 +1953,32 @@ const LiveDemoSection = () => {
         </div>
         
         <div className="flex-grow w-full bg-[#0a0f1c] relative">
-          <iframe 
-            key={activeDemo}
-            src={currentDemo.url}
-            className="w-full h-full border-none absolute inset-0 z-20"
-            title={currentDemo.title}
-            loading="lazy"
-            sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox"
-          />
+          {currentDemo.url.includes('github.com') ? (
+            <div className="absolute inset-0 z-20 flex flex-col items-center justify-center p-8 bg-[#0a0f1c]">
+              <Github size={48} className="text-gray-400 mb-6" />
+              <h3 className="text-2xl font-bold text-white mb-2">GitHub Repository</h3>
+              <p className="text-gray-400 text-center max-w-md mb-8">
+                This project is hosted on GitHub. GitHub security policies prevent displaying the repository inside an embedded frame.
+              </p>
+              <a 
+                href={currentDemo.url} 
+                target="_blank" 
+                rel="noreferrer"
+                className="flex items-center gap-2 px-6 py-3 bg-white text-black font-semibold rounded-lg hover:bg-gray-200 transition-colors"
+              >
+                Open in GitHub <ExternalLink size={18} />
+              </a>
+            </div>
+          ) : (
+            <iframe 
+              key={activeDemo}
+              src={currentDemo.url}
+              className="w-full h-full border-none absolute inset-0 z-20"
+              title={currentDemo.title}
+              loading="lazy"
+              sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox"
+            />
+          )}
           <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-10 bg-black">
             <div className="w-16 h-16 border-4 border-blue-500/10 border-t-blue-500 rounded-full animate-spin mb-6" />
             <div className="text-[10px] font-bold uppercase tracking-[0.3em] text-gray-500 animate-pulse">Establishing Secure Uplink...</div>
@@ -2109,6 +2134,40 @@ const ArchitectureSection = () => {
 
                     Report -->|"Displays Fix & RCA"| User
                     Report -.->|"Logs Data"| Metrics[("(Prometheus Metrics)")]:::process
+                `}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Trial Sync Architecture */}
+        <div>
+          <h3 className="text-xl font-bold mb-6 text-white ml-2 border-l-4 border-yellow-500 pl-4">Trial Sync Platform</h3>
+          <div className="glass-card p-4 md:p-8 overflow-x-auto relative rounded-3xl border border-white/10 shadow-2xl bg-[#0a0f1c]/50">
+            <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/5 via-transparent to-orange-500/5 pointer-events-none" />
+            <div className="w-full flex justify-center py-8">
+              <div className="mermaid w-full text-center [&>svg]:w-full [&>svg]:max-w-4xl [&>svg]:h-auto [&>svg]:mx-auto">
+                {`
+                  graph LR
+                    classDef client fill:#1e40af,stroke:#60a5fa,stroke-width:2px,color:#fff,rx:10,ry:10
+                    classDef engine fill:#0f766e,stroke:#5eead4,stroke-width:2px,color:#fff,rx:5,ry:5
+                    classDef db fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#fff,rx:15,ry:15
+                    classDef connect fill:#6b21a8,stroke:#d8b4fe,stroke-width:2px,color:#fff,rx:10,ry:10
+
+                    CRO["CRO Portal"]:::client
+                    Site["Clinical Site"]:::client
+                    Sponsor["Sponsor Dashboard"]:::client
+                    Gateway["API Gateway / WAF"]:::engine
+                    Engine["Sync Protocol Engine"]:::engine
+                    DB[("Encrypted DB\n(FHIR/Health Level 7)")]:::db
+                    EDC["External EDC Systems"]:::connect
+
+                    CRO --> Gateway
+                    Site --> Gateway
+                    Sponsor --> Gateway
+                    Gateway --> Engine
+                    Engine <--> DB
+                    Engine <-->|"HL7/FHIR Protocol"| EDC
                 `}
               </div>
             </div>
