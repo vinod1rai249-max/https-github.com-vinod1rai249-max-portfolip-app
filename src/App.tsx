@@ -2378,10 +2378,9 @@ export default function App() {
         role: 'Technical Lead',
         duration: 'Oct 2018 - Present',
         achievements: [
-          'Architected and deployed "ADPO" — an AI-powered agentic system using FastAPI, Gemini Pro, and RAG pipelines that automates crash log diagnostics.',
-          'Built and fine-tuned interactive LLM applications, including an enterprise RAG Document Chat Bot for instantaneous internal knowledge retrieval.',
-          'Drove an ~80% automation uplift in operational efficiency by replacing manual debugging with intelligent, multi-agent AI pipelines.',
-          'Led cross-functional engineering efforts to bridge legacy systems (MuleSoft/Mainframe) with modern Generative AI architectures on AWS/GCP.'
+          'Architected AI-powered automation platforms, including "ADPO" for crash log diagnostics and an enterprise RAG bot for rapid knowledge retrieval.',
+          'Increased operational efficiency by 80% through replacing manual debugging processes with intelligent, multi-agent AI pipelines.',
+          'Led technical strategy to integrate legacy infrastructure with modern Generative AI capabilities deployed across AWS and GCP.'
         ],
         order: 1
       },
