@@ -383,7 +383,7 @@ const Hero = ({
           </h1>
           
           <div className="text-xl lg:text-2xl font-sans font-light text-gray-400 mb-12 max-w-xl leading-relaxed">
-            Senior <span className="text-white font-medium">GenAI Architect</span> specializing in mission-critical integration and autonomous agent pipelines. Delivering <span className="text-blue-500 font-medium">~80% automation uplift</span> through elite AI engineering.
+            Senior <span className="text-white font-medium">Genai Engineer</span> specializing in mission-critical integration and autonomous agent pipelines. Delivering <span className="text-blue-500 font-medium">~80% automation uplift</span> through elite AI engineering.
           </div>
           
           <div className="flex items-center gap-8 mb-12">
@@ -1841,9 +1841,16 @@ const ReactionsWidget = () => {
 
 
 const LiveDemoSection = () => {
-  const [activeDemo, setActiveDemo] = useState<'trialSync' | 'clinicalSupport' | 'adpoHealth' | 'adpo' | 'chatbot' | 'securityControlPlane'>('trialSync');
+  const [activeDemo, setActiveDemo] = useState<'aiSmartBuilder' | 'trialSync' | 'clinicalSupport' | 'adpoHealth' | 'adpo' | 'chatbot' | 'securityControlPlane'>('aiSmartBuilder');
 
   const demos = {
+    aiSmartBuilder: {
+      title: 'AI Smart Builder',
+      desc: 'Generative AI-powered design-to-code workspace that orchestrates framework-aware layouts and interactive code builders.',
+      url: 'https://ai-smart-builder-249.streamlit.app/?embed=true',
+      domain: 'ai-smart-builder.streamlit.app',
+      icon: <Cpu size={20} />
+    },
     trialSync: {
       title: 'Trial Sync Platform',
       desc: 'Clinical data synchronization protocol and real-time trial management pipeline.',
@@ -2016,6 +2023,37 @@ const ArchitectureSection = () => {
       </div>
       
       <div className="space-y-12">
+        {/* AI Smart Builder Section */}
+        <div>
+          <h3 className="text-xl font-bold mb-6 text-white ml-2 border-l-4 border-blue-500 pl-4">AI Smart Builder Architecture</h3>
+          <div className="glass-card p-4 md:p-8 overflow-x-auto relative rounded-3xl border border-white/10 shadow-2xl bg-[#0a0f1c]/50">
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-purple-500/5 pointer-events-none" />
+            <div className="w-full flex justify-center py-8">
+              <div className="mermaid w-full text-center [&>svg]:w-full [&>svg]:max-w-4xl [&>svg]:h-auto [&>svg]:mx-auto">
+                {`
+                  graph TD
+                    classDef client fill:#1e40af,stroke:#60a5fa,stroke-width:2px,color:#fff,rx:10,ry:10
+                    classDef agent fill:#0f766e,stroke:#5eead4,stroke-width:2px,color:#fff,rx:5,ry:5
+                    classDef engine fill:#701a75,stroke:#f472b6,stroke-width:2px,color:#fff,rx:10,ry:10
+                    classDef store fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#fff,rx:15,ry:15
+
+                    UI["💻 User Workspace / UI Controls"]:::client
+                    Orchestrator["🤖 Agent Orchestrator\n(Planning & Validation)"]:::agent
+                    Model["🧠 Gemini LLM Engine\n(Generative Layouts & Code)"]:::engine
+                    Registry["📦 Target Templates & UI Component Library"]:::store
+                    Renderer["⚙️ Virtual Compiler & Hot Preview Frame"]:::agent
+
+                    UI -->|"User Prompt & Specs"| Orchestrator
+                    Orchestrator <-->|"In-Context Learning & Structured Schema"| Model
+                    Orchestrator <-->|"Queries Core Components"| Registry
+                    Orchestrator -->|"Generated Code Package"| Renderer
+                    Renderer -->|"Interactive Application Preview"| UI
+                `}
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Clinical Decision Support Section */}
         <div>
           <h3 className="text-xl font-bold mb-6 text-white ml-2 border-l-4 border-green-500 pl-4">Clinical Decision Support System</h3>
